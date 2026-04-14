@@ -3688,6 +3688,7 @@ void Spell::SendLoot(ObjectGuid guid, LootType loottype, LockType lockType)
                         {
                             case LOCKTYPE_NONE:
                             case LOCKTYPE_DISARM_TRAP:
+                            case LOCKTYPE_OPEN: // handle GO 178559 in patch 2.4.3 which apparently uses open and not open_attacking
                             case LOCKTYPE_OPEN_ATTACKING:
                                 gameObjTarget->SetLootState(GO_ACTIVATED);
                                 return;
