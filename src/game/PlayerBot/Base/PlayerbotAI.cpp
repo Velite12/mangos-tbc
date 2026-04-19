@@ -2337,6 +2337,9 @@ void PlayerbotAI::HandleBotOutgoingPacket(const WorldPacket& packet)
                     if (loot_type == LOOT_SKINNING || HasCollectFlag(COLLECT_FLAG_LOOT) ||
                             (loot_type == LOOT_CORPSE && (IsInQuestItemList(itemid) || IsItemUseful(itemid))))
                     {
+                        if (loot_type == LOOT_SKINNING && !m_bot->HasSkill(SKILL_SKINNING))
+                            continue;
+
                         ItemPosCountVec dest;
                         if (m_bot->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, itemid, itemcount) == EQUIP_ERR_INVENTORY_FULL)
                         {

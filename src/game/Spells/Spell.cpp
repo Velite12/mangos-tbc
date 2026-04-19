@@ -5115,7 +5115,19 @@ SpellCastResult Spell::CheckCast(bool strict)
             {
                 // Exclusion for Pounce: Facing Limitation was removed in 2.0.1, but it still uses the same, old Ex-Flags
                 if (!m_spellInfo->IsFitToFamily(SPELLFAMILY_DRUID, uint64(0x0000000000020000)))
-                    return SPELL_FAILED_NOT_BEHIND;
+                {
+                    switch (m_spellInfo->Id)
+                    {
+                        // custom: don't check mutilate
+                        case 1329:
+                        case 34411:
+                        case 34412:
+                        case 34413:
+                            break;
+                        default:
+                            return SPELL_FAILED_NOT_BEHIND;
+                    }
+                }
             }
 
             // duplicate block to avoid previous block complex logic

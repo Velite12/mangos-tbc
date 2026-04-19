@@ -589,6 +589,8 @@ void World::LoadConfigSettings(bool reload)
     setConfigMinMax(CONFIG_UINT32_TRADE_SKILL_GMIGNORE_LEVEL, "TradeSkill.GMIgnore.Level", SEC_CONSOLE, SEC_PLAYER, SEC_CONSOLE);
     setConfigMinMax(CONFIG_UINT32_TRADE_SKILL_GMIGNORE_SKILL, "TradeSkill.GMIgnore.Skill", SEC_CONSOLE, SEC_PLAYER, SEC_CONSOLE);
 
+    setConfigMinMax(CONFIG_UINT32_RESET_TALENT_COST_CAP, "ResetTalentCostCap", 50, 10, MAX_MONEY_AMOUNT);
+
     setConfigMinMax(CONFIG_UINT32_MIN_PETITION_SIGNS, "MinPetitionSigns", 9, 0, 9);
 
     setConfig(CONFIG_UINT32_GM_LOGIN_STATE,                 "GM.LoginState",                2);
