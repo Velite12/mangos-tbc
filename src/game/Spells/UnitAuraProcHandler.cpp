@@ -2475,7 +2475,7 @@ SpellAuraProcResult Unit::HandleProcTriggerSpellAuraProc(ProcExecutionData& data
             {
                 // Only trigger if you are not the target (Slice and Dice casts twice,
                 // ignore on you, keep on target)
-                if (pVictim->GetGUIDLow() != GetGUIDLow()) 
+                if (pVictim->GetObjectGuid() != GetObjectGuid()) 
                 {
                     spell->AddTriggeredSpell(trigger_spell_id);
                     return SPELL_AURA_PROC_OK;
