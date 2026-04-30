@@ -320,7 +320,7 @@ void FixedPathMovementGenerator::AddToPathPauseTime(int32 waitTimeDiff, bool for
 
 void TaxiMovementGenerator::Initialize(Unit& unit)
 {
-    AbstractPathMovementGenerator::Initialize(unit);
+    AbstractPathMovementGenerator::Finalize(unit);
 
     // Client-controlled unit should have control removed
     if (const Player* controllingClientPlayer = unit.GetClientControlling())
