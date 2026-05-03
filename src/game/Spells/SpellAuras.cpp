@@ -5051,6 +5051,13 @@ void Aura::HandlePeriodicDamage(bool apply, bool Real)
                     if (cp > 3) cp = 3;
                     m_modifier.m_amount += int32(caster->GetTotalAttackPowerValue(BASE_ATTACK) * cp / 100);
                 }
+                // Custom: Deadly Poison VII scaling with attack power
+                else if ((spellProto->SpellFamilyFlags & uint64(0x0010000)) && spellProto->Id == 27187)
+                {
+                    if (caster->GetTypeId() != TYPEID_PLAYER)
+                        break;
+                    m_modifier.m_amount += int32(caster->GetTotalAttackPowerValue(BASE_ATTACK) * 0.02f);
+                }
                 break;
             }
             default:
