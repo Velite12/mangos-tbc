@@ -1380,7 +1380,6 @@ enum
     QUEST_VENGEFUL_HARBINGER = 10842,
 
     POINT_ID_END = 4,
-    POINT_ID_ALMOST_END = 3,
     PATH_ID_END = 2,
 };
 
@@ -1437,7 +1436,6 @@ struct npc_vengeful_harbinger : public ScriptedAI
                     m_creature->GetMotionMaster()->Clear(false, true);
                     m_creature->GetMotionMaster()->MoveWaypoint(2);
                 }
-                
                 break;
             }
             // Turns out, you can just complete it at the respawned GO without credit
@@ -1508,7 +1506,6 @@ struct npc_vengeful_harbinger : public ScriptedAI
         m_creature->GetMotionMaster()->Clear(false, true);
         m_creature->GetMotionMaster()->MoveIdle();
         m_creature->GetMap()->ScriptsStart(SCRIPT_TYPE_RELAY, DBSCRIPT_VENGEFUL_HARBINGER_FAKE_DEATH, m_creature, m_creature);
-
     }
 };
 
