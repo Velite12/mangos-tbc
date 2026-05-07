@@ -1564,6 +1564,23 @@ SpellAuraProcResult Unit::HandleDummyAuraProc(ProcExecutionData& data)
                 triggered_spell_id = 31663;
                 break;
             }
+            // Custom: Find Weakness refreshes slice and dice
+            if (dummySpell->SpellIconID == 2112)
+            {
+                // lookup Slice and Dice
+                AuraList const& sd = GetAurasByType(SPELL_AURA_MOD_MELEE_HASTE);
+                for (auto itr : sd)
+                {
+                    SpellEntry const* spellProto = itr->GetSpellProto();
+                    if (spellProto->SpellFamilyName == SPELLFAMILY_ROGUE &&
+                            (spellProto->SpellFamilyFlags & uint64(0x0000000000040000)))
+                    {
+                        itr->GetHolder()->RefreshHolder();
+                        return SPELL_AURA_PROC_OK;
+                    }
+                }
+                return SPELL_AURA_PROC_FAILED;
+            }
             break;
         }
         case SPELLFAMILY_HUNTER:
