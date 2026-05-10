@@ -5059,7 +5059,7 @@ void Aura::HandlePeriodicDamage(bool apply, bool Real)
                 {
                     if (caster->GetTypeId() != TYPEID_PLAYER)
                         break;
-                    m_modifier.m_amount += int32(caster->GetTotalAttackPowerValue(BASE_ATTACK) * 0.10f);
+                    m_modifier.m_amount += int32(caster->GetTotalAttackPowerValue(BASE_ATTACK) * 0.12f);
                 }
                 break;
             }
