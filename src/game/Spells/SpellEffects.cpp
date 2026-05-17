@@ -461,12 +461,31 @@ void Spell::EffectSchoolDMG(SpellEffectIndex eff_idx)
                         // count consumed deadly poison doses at target
                         if (poison)
                         {
+                            bool needConsume = true;
                             uint32 spellId = poison->GetId();
                             uint32 doses = poison->GetStackAmount();
                             if (doses > combo)
                                 doses = combo;
 
-                            unitTarget->RemoveAuraHolderFromStack(spellId, doses, m_caster->GetObjectGuid());
+                            //unitTarget->RemoveAuraHolderFromStack(spellId, doses, m_caster->GetObjectGuid());
+
+                            // Custom: Master Poisoner, chance to not remove deadly poison stacks
+                            Unit::AuraList const& auraList = ((Player*)m_caster)->GetAurasByType(SPELL_AURA_DUMMY);
+                            for (auto iter : auraList)
+                            {
+                                if (iter->GetSpellProto()->SpellFamilyName == SPELLFAMILY_ROGUE && iter->GetSpellProto()->SpellIconID == 1960)
+                                {
+                                    if (int32 chance = iter->GetSpellProto()->CalculateSimpleValue(EFFECT_INDEX_1))
+                                        if (roll_chance_i(chance))
+                                            needConsume = false;
+
+                                    break;
+                                }
+                            }
+
+                            if (needConsume)
+                                unitTarget->RemoveAuraHolderFromStack(spellId, doses, m_caster->GetObjectGuid());
+
 
                             damage *= doses;
                             damage += int32(((Player*)m_caster)->GetTotalAttackPowerValue(BASE_ATTACK) * 0.03f * doses);
